@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "~/Views/Shared/_Root.Head.cshtml";
+}
+
+<div id="wrapper">
+    <div class="container">
+        <div class="row-fluid">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+<footer></footer>
+
+@RenderSection("scripts", required: false)

@@ -1,0 +1,253 @@
+﻿@model fastforward.Models.CollegeConnections
+
+<section class="cc-section">
+    <div class="row-fluid">
+        <div class="span12">
+            <h2>@Model.NumberOfFriendsWhoWentToCollege of your friends went to college.</h2>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <img src="~/Images/cap.jpg" class="section-image" />
+        </div>
+
+        <div class="span8">
+            <h3 class="headline">Including:</h3>
+            <ul class="facepile">
+                @foreach (var friend in Model.FeaturedCollegeEducatedFriends)
+                {
+                    <li data-id="@friend.UID">
+                        <img src="@friend.Pic_Square" title="@friend.Name" />
+                    </li>
+                }
+            </ul>
+            @if (Model.HasAtLeastMinimumFeaturedCollegeFriends)
+            {
+                <div>... and @Model.NumberOfAdditionalFriendsWhoWentToCollege more</div>
+            }
+
+        </div>
+    </div>
+</section>
+
+<section class="cc-section">
+    <div class="row-fluid">
+        <div class="span12">
+            <h2>Most of your friends went to:</h2>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <img src="~/Images/building.jpg" class="section-image" />
+        </div>
+
+        <div class="span8">
+            @foreach (var school in Model.FriendsTopSchools)
+            {
+                <div class="grouping-category clearfix">
+                    <h3 class="headline">@school.Key</h3>
+                    <ul class="facepile">
+                        @foreach (var friend in school.Value)
+                        {
+                            <li data-id="@friend.UID">
+                                <img src="@friend.Pic_Square" title="@friend.Name"/>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+
+<section class="cc-section">
+    <div class="row-fluid">
+        <div class="span12">
+            <h2>Most of your friends majored in:</h2>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <img src="~/Images/star.jpg" class="section-image" />
+        </div>
+
+        <div class="span8">
+            @foreach (var school in Model.TopMajorsWithUsers)
+            {
+                <div class="grouping-category clearfix">
+                    <h3 class="headline">@school.Key</h3>
+                    <ul class="facepile">
+                        @foreach (var friend in school.Value)
+                        {
+                            <li data-id="@friend.UID">
+                                <img src="@friend.Pic_Square" title="@friend.Name"/>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+
+<section class="cc-section">
+    <div class="row-fluid">
+        <div class="span12">
+            <h2>Most of your friends went to college in:</h2>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <img src="~/Images/world.jpg" class="section-image" />
+        </div>
+
+        <div class="span8">
+            @foreach (var school in Model.TopCollegeLocationsWithUsers)
+            {
+                <div class="grouping-category clearfix">
+                    <h3 class="headline">@school.Key</h3>
+                    <ul class="facepile">
+                        @foreach (var friend in school.Value)
+                        {
+                            <li data-id="@friend.UID">
+                                <img src="@friend.Pic_Square" title="@friend.Name"/>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+
+<section class="cc-section">
+    <div class="row-fluid">
+        <div class="span12">
+            <h2>Most of your female friends went to:</h2>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <img src="~/Images/woman.jpg" class="section-image" />
+        </div>
+
+        <div class="span8">
+            @foreach (var school in Model.FemaleFriendsCollege)
+            {
+                <div class="grouping-category clearfix">
+                    <h3 class="headline">@school.Key</h3>
+                    <ul class="facepile">
+                        @foreach (var friend in school.Value)
+                        {
+                            <li data-id="@friend.UID">
+                                <img src="@friend.Pic_Square" title="@friend.Name"/>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+
+<section class="cc-section">
+    <div class="row-fluid">
+        <div class="span12">
+            <h2>Most of your male friends went to:</h2>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <img src="~/Images/man.jpg" class="section-image" />
+        </div>
+
+        <div class="span8">
+            @foreach (var school in Model.MaleFriendsCollege)
+            {
+                <div class="grouping-category clearfix">
+                    <h3 class="headline">@school.Key</h3>
+                    <ul class="facepile">
+                        @foreach (var friend in school.Value)
+                        {
+                            <li data-id="@friend.UID">
+                                <img src="@friend.Pic_Square" title="@friend.Name"/>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+
+<section class="cc-section">
+    <div class="row-fluid">
+        <div class="span12">
+            <h2>Most of your female friends majored in:</h2>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <img src="~/Images/book.jpg" class="section-image" />
+        </div>
+
+        <div class="span8">
+            @foreach (var school in Model.FemaleFriendsMajors)
+            {
+                <div class="grouping-category clearfix">
+                    <h3 class="headline">@school.Key</h3>
+                    <ul class="facepile">
+                        @foreach (var friend in school.Value)
+                        {
+                            <li data-id="@friend.UID">
+                                <img src="@friend.Pic_Square" title="@friend.Name"/>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+
+<section class="cc-section">
+    <div class="row-fluid">
+        <div class="span12">
+            <h2>Most of your male friends majored in:</h2>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <img src="~/Images/pencil.jpg" class="section-image" />
+        </div>
+
+        <div class="span8">
+            @foreach (var school in Model.MaleFriendsMajors)
+            {
+                <div class="grouping-category clearfix">
+                    <h3 class="headline">@school.Key</h3>
+                    <ul class="facepile">
+                        @foreach (var friend in school.Value)
+                        {
+                            <li data-id="@friend.UID">
+                                <img src="@friend.Pic_Square" title="@friend.Name"/>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+
+
+<div class="text-center margin-bottom">
+    <a href="/Home/Search" class="btn btn-danger btn-large ">Next: Search our Careers Database<i class="icon-forward icon-white margin-left-10"></i></a>
+</div>

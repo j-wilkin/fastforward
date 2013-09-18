@@ -1,0 +1,57 @@
+﻿@using fastforward.Models
+@using Microsoft.AspNet.Mvc.Facebook.Models
+@model MyAppUser
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@*<img class="welcome-img" src= "../images/frontpg.jpg" />*@
+<div class="welcome-header">
+    <p class="small">WELCOME TO...</p>
+    <p class="large">FAST FORWARD</p>
+</div>
+
+<p class ="survey-text">
+    Ever wonder what it would be like to see into the future?  Your future?  FastForward yourself to learn what your career might look like, or what your careers might look like, and learn how you got there. 
+</p>
+
+<ul class="feature-list indent-large">
+    <li>
+        <h5><i class="icon-ok"></i>Take our survey to get matched with a potential career path</h5>
+    </li>
+    <li>
+        <h5><i class="icon-ok"></i>Learn what it takes to be successful in that career</h5>
+    </li>
+    <li>
+        <h5><i class="icon-ok"></i>Access helpful resources to get your college/career plans started today!</h5>
+    </li>
+    <li>
+        <h5><i class="icon-ok"></i>Find mentors and other professionals in your network</h5>
+    </li>
+    <li>
+        <h5><i class="icon-ok"></i>Search through even more careers to learn about them</h5>
+    </li>
+
+</ul>
+
+
+<h4 class="survey-text">Take our survey to find out which career path is right for you!</h4>
+
+@*@if (Model.ProfilePicture != null && Model.ProfilePicture.Data != null)
+{
+    <img src="@Model.ProfilePicture.Data.Url" class="img-polaroid prof-pic" height="250" width="250">
+}*@
+
+
+
+
+<a class="btn btn-danger btn-large displayBlock align-center-block margin-top margin-bottom w115" href="/Home/Survey">Get Started</a>
+<a class="btn btn-warning displayBlock align-center-block margin-top margin-bottom w115" href="/Home/Search">Explore Careers</a>
+
+<script type="text/javascript">
+
+    $(function () {
+        fastforward.initActiveMenuItem('home');
+    });
+
+</script>

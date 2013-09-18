@@ -1,0 +1,115 @@
+﻿@model fastforward.Models.CareerSearchResultDetailsModel
+
+@{
+    ViewBag.Title = "SearchResultDetails";
+    Layout = "~/Views/Shared/_Layout_NoCircles.cshtml";
+}
+
+<div>
+    @Html.ActionLink("<< Back to Search", "Search", "Home", new {searchText = Model.SearchText}, null)    
+</div>
+
+<div class="intro btn btn-large btn-primary disabled margin-top">
+    <h2>@Model.CareerName</h2>
+</div>
+
+<ul class="nav nav-tabs margin-top">
+    <li class="active"><a href="#Description" data-toggle="tab">Description</a></li>
+    <li><a href="#Tasks" data-toggle="tab">Tasks</a></li>
+    <li><a href="#Knowledge" data-toggle="tab">Knowledge</a></li>
+    <li><a href="#Skills" data-toggle="tab">Skills</a></li>
+    <li><a href="#Abilities" data-toggle="tab">Abilities</a></li>
+    <li><a href="#Activities" data-toggle="tab">Activities</a></li>
+    <li><a href="#Interests" data-toggle="tab">Interests</a></li>
+    <li><a href="#Styles" data-toggle="tab">Styles</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="Description">
+        <h3>What They Do</h3>
+        <p>@Model.DescriptionDetails.description</p>
+    </div>
+
+    <div class="tab-pane" id="Tasks">
+        <h3>On the job, you would:</h3>
+        <ul>
+            @foreach (var task in Model.Tasks)
+            {
+                <li>@task.task</li>
+            }
+        </ul>
+    </div>
+
+    <div class="tab-pane" id="Knowledge">
+        <h3>Knowledge</h3>
+
+        @foreach (var knowledgeItem in Model.KnowledgeItems)
+        {
+            <h5>@knowledgeItem.KnowledgeName</h5>
+            <ul>
+                <li>@knowledgeItem.KnowledgeDescription</li>
+            </ul>         
+        }
+
+    </div>
+
+    <div class="tab-pane" id="Skills">
+        <h3>Skills</h3>
+
+        @foreach (var skill in Model.Skills)
+        {
+            <h5>@skill.SkillsName</h5>
+            <ul>
+                <li>@skill.SkillsDescription</li>
+            </ul>         
+        }
+    </div>
+
+    <div class="tab-pane" id="Abilities">
+        <h3>Abilities</h3>
+
+        @foreach (var ability in Model.Abilities)
+        {
+            <h5>@ability.AbilityName</h5>
+            <ul>
+                <li>@ability.AbilityDescription</li>
+            </ul>         
+        }
+    </div>
+
+    <div class="tab-pane" id="Activities">
+        <h3>Activities</h3>
+
+        @foreach (var activity in Model.Activities)
+        {
+            <h5>@activity.WorkActivityName</h5>
+            <ul>
+                <li>@activity.WorkActivityDescription</li>
+            </ul>         
+        }    
+    </div>
+
+    <div class="tab-pane" id="Interests">
+         <h3>Interests</h3>
+
+        @foreach (var interest in Model.Interests)
+        {
+            <h5>@interest.InterestName</h5>
+            <ul>
+                <li>@interest.InterestDescription</li>
+            </ul>         
+        }    
+    </div>
+
+    <div class="tab-pane" id="Styles">
+        <h3>Styles</h3>
+
+        @foreach (var style in Model.Styles)
+        {
+            <h5>@style.WorkStylesName</h5>
+            <ul>
+                <li>@style.WorkStylesDescription</li>
+            </ul>         
+        }    
+    </div>
+</div>

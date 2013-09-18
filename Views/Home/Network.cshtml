@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Network";
+    Layout = "~/Views/Shared/_Layout_NoCircles.cshtml";
+}
+
+<div class="intro btn btn-large btn-primary disabled margin-top">
+    <h2>Network</h2>
+</div>
+
+<div id="networkLanding">
+
+    <div class="row-fluid margin-bottom margin-top">
+        <div class="span12">
+            <h2 class="align-center">Discover where your friends and family<br />went to college, and find a mentor who can<br />give advice and help you on your way!</h2>
+        </div>
+    </div>
+
+    <div class="row-fluid margin-bottom-double">
+        <img src="~/Images/collegestudents.jpg" class="displayBlock align-center-block" />
+    </div>
+
+    <div class="row-fluid">
+        <div class="span5 offset1">
+            <h4 class="no-margin-top">We analyze your facebook data to discover your connections</h4>
+        </div>
+        <div class="span5 offset1">
+            <div>
+                <a href="#" id="collegeConnectionsButton" class="btn btn-primary">Get Your Instant Analysis
+                    @*<img src="~/Images/fb-analysis.png" />*@
+                </a>
+            </div>
+            <div id="collegeConnectionsLoading" class="margin-top hide">
+                <div>Sit tight - this can take up to a minute</div>
+                <div class="margin-top margin-left-75">
+                    <img src="~/Images/loading.gif" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="results" class="margin-top hide"></div>
+
+<script type="text/javascript">
+
+    $(function () {
+
+        fastforward.initActiveMenuItem('network');
+
+        $('#collegeConnectionsButton').click(function() {
+            $('#collegeConnectionsLoading').show();
+            $('#results').hide();
+
+            var url = '/Home/CollegeConnections?accessToken=@ViewBag.AccessToken';
+            $.ajax({
+                type: "GET",
+                url: url,
+                contentType: "application/json",
+                success: function (response) {
+                    $('#networkLanding').fadeOut(function() {
+                        $('#results').html('').html(response).fadeIn();
+                    });
+                },
+
+                error: function (response) {
+                },
+                complete: function () {
+                }
+            });
+
+            return false;
+        });
+    });
+
+</script>

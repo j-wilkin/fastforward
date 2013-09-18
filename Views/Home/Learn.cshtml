@@ -1,0 +1,38 @@
+﻿@model fastforward.Models.LearnModel
+
+@{
+    ViewBag.Title = "Learn";
+    Layout = "~/Views/Shared/_Layout_NoCircles.cshtml";
+}
+
+<div class="intro btn btn-large btn-primary disabled margin-top">
+    <h2>Learn</h2>
+</div>
+
+
+<div class="margin-bottom-double">
+    @foreach (var video in Model.Videos)
+    {
+        <div class="margin-top margin-bottom">
+            <h3>@video.Name</h3>
+            <h5>@video.Description</h5>
+            <div data-kaltura-id="@video.VideoId" id="@video.VideoId" class="videoThumb" style="background-image:url('http://cdnbakmi.kaltura.com/p/29959/sp/2995900/thumbnail/entry_id/@video.VideoId/version/100000/width/550/height/300/type/3/quality/80');height: 300px;width: 550px">
+                <div class="playbutton playbutton-active"></div>
+            </div>
+            <div id="player_@video.VideoId"></div>
+            <div class="hide @video.VideoId">
+                @Html.Raw(@video.Video)
+            </div>
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+
+        fastforward.initActiveMenuItem('learn');
+
+    });
+
+</script>

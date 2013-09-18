@@ -1,0 +1,73 @@
+﻿@using fastforward.Helpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    @*@Styles.Render("~/Content/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/less/bootstrapless", "~/Content/fastforward")
+    @Scripts.Render("~/bundles/jquery")
+</head>
+    <body>
+        <div id="fb-root"></div>
+        <script>
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '@Microsoft.AspNet.Mvc.Facebook.GlobalFacebookConfiguration.Configuration.AppId', // App ID
+                    status: true, // check login status
+                    cookie: true, // enable cookies to allow the server to access the session
+                    xfbml: true  // parse XFBML
+                });
+            };
+
+            // Load the SDK Asynchronously
+            (function (d) {
+                var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+                if (d.getElementById(id)) { return; }
+                js = d.createElement('script'); js.id = id; js.async = true;
+                js.src = "//connect.facebook.net/en_US/all.js";
+                ref.parentNode.insertBefore(js, ref);
+            }(document));
+        </script>
+
+        @RenderBody()   
+
+    </body>
+    
+    <script src='//connect.facebook.net/en_US/all.js'></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.cookie.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/fastforward")
+    
+    <script type="text/javascript">
+        var fastforward = fastforward || {};
+
+        fastforward.postToFeed = function() {
+            //alert('posting to feed');
+            
+            // calling the API ...
+            var obj = {
+                method: 'feed',
+                link: '@GlobalHelper.GetConfigSetting(AppConstants.BaseUrl)', 
+                picture: 'https://unigo.blob.core.windows.net/fastforward/fastforward.png',
+                name: 'Fast Forward',
+                caption: 'Check this out',
+                description: 'Learn about potential careers and colleges.'
+            };
+
+            function callback(response) {
+            }
+
+            FB.ui(obj, callback);
+        };
+
+    </script>
+   
+</html>

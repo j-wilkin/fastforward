@@ -1,0 +1,74 @@
+﻿@model fastforward.Models.Survey
+
+@{
+    ViewBag.Title = "Survey";
+}
+
+<div class="intro btn btn-large btn-primary disabled">
+    <h1>Survey</h1>
+</div>
+
+<ul class="feature-list indent-small">
+    <li>
+        <i class="icon-ok"></i><h5>Our survey identifies which careers match up best with your strengths and interests</h5>
+    </li>
+    <li>
+        <i class="icon-ok"></i><h5>We'll use your answers to generate an interactive display where you can learn more about each career and see what steps you can take to get started</h5>
+    </li>
+</ul>
+
+<div class="alert alert-info">
+  <strong>Heads up!</strong> You must answer every question before submitting the survey, it should only take a minute
+</div>
+
+@using (Html.BeginForm("Survey", "Home", FormMethod.Post))
+{<div class="row-fluid survey">
+    <div class="span12">
+        <table class="survey-questions-table table table-striped table-hover">
+            <thead>
+                <tr>
+                    <td class="span1" style="font-weight: bold">Strongly Disagree</td>
+                    <td class="span1" style="font-weight: bold">Disagree</td>
+                    <td class="span1" style="font-weight: bold">Neutral</td>
+                    <td class="span1" style="font-weight: bold">Agree</td>
+                    <td class="span1" style="font-weight: bold">Strongly Agree</td>
+                </tr>
+
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.Questions.Count; i++)
+                {
+                    if (Model.Questions[i].IsViewable)
+                    {
+                    <tr>
+                        @foreach (var answer in Model.Questions[i].Answers)
+                        {
+                            <td class="span1">@Html.RadioButtonFor(r => r.Questions[i].Result, answer.AnswerId, new { required = "required" })</td>
+                        }
+                        <td class="span7">@Model.Questions[i].QuestionText</td>
+                    </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+    <div class="bottom">
+        <input class="btn btn-danger btn-large survey-btn" type="submit" value="Submit" />
+    </div>
+}
+
+<script type="text/javascript">
+
+    $(function () {
+        fastforward.initActiveMenuItem('survey');
+
+        $('form').submit(function () {
+            if (!$(this).valid()) {
+                alert('Please answer every question before submitting');
+            }
+        });
+    });
+
+</script>

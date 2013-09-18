@@ -1,0 +1,252 @@
+﻿@model fastforward.Models.Timeline
+
+@{
+    ViewBag.Title = "Timeline";
+}
+<div class="intro btn btn-large btn-primary disabled">
+    <h1>@Model.Career.CareerName Timeline</h1>
+</div>
+
+<div class="alert fade-in margin-top-10"><strong>Note:</strong> All comments are purely fictional and intended to motivate you! These are not real comments from your friends.</div>
+<div class="timeline-header">
+    <div class="btn btn-large btn-primary disabled">
+        <h5 style: margin-left="0px;">Take a glimpse into the future with your personalized timeline!</h5>
+        <h5 style: margin-left="0px;">Scroll through or click each event to see helpful tips and future comments from friends.</h5> 
+        <h5 style: margin-left="0px;">Find helpful links at the bottom to start planning the paths your goals!</h5> 
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<section class="timeline">
+    @for (var i = 0; i < Model.Events.Count(); i++)
+    {
+
+        if (Model.Events[i].Major)
+        {
+            <div class="box">
+                @if (Model.Events[i].IsSelfPost)
+                {
+                
+                    <div id="box_@i" data-content="@Model.Events[i].Comment" data-delay="200" data-trigger="manual" data-title="@Model.Friends[i].Name" data-placement="right" class="modal">
+            
+                        <div class="modal-header">
+                            <img class="img-rounded" src="@Model.User.ProfilePicture.Data.Url">
+                            <h4 class="modal-headerB pull-right">@Model.User.Name</h4>
+                        </div>
+        
+                        <div class="modal-body">
+                            <h5>@Model.Events[i].TextContent</h5>
+            
+                        </div>
+                        <div class="modal-footer">
+                            <h6 class="pull-left">@Model.Friends[i].Name and @(i%10+2) others like this.</h6>
+                        </div>
+        
+                    </div>
+       
+                }
+                else if (Model.Events[i].IsDivider)
+                {
+                    <div id="box_@i" data-content="@Model.Events[i].Comment" data-delay="200" data-trigger="manual" data-title="@Model.Friends[i].Name" data-placement="right" class="modal">
+                        <div class="modal-header">
+                            <h4 class="text-center modal-headerA">@Model.Events[i].Headline</h4>
+                        </div>
+                        <div class="modal-body text-center">
+                            <h5>@Model.Events[i].TextContent</h5>
+                        </div>
+                    </div>       
+                    
+                }
+                else
+                {
+                    <div id="box_@i" data-content="@Model.Events[i].Comment" data-delay="200" data-trigger="manual" data-title="@Model.Friends[i].Name" data-placement="right" class="modal">
+                        <div class="modal-header">
+                            <h2 class="text-center modal-headerA">@Model.Events[i].Headline</h2>
+                        </div>
+                        <div class="modal-body text-center">
+                            <h5>@Model.Events[i].TextContent</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <h6 class="pull-left">@Model.Friends[i].Name and @(i%10+2) others like this.</h6>
+                        </div>
+                    </div>
+                }
+            </div>
+        
+        
+        }
+        else
+        {
+                <div class="bubble" data-content="@Model.Events[i].TextContent" data-delay="200" data-trigger="manual" data-title="@Model.Events[i].Headline" data-placement="left">
+                    <img id="box_@i" src="@Model.Events[i].Image"  width="200" height="200" class="face img-circle"/>
+                </div>
+        }
+    }
+    <div class="box">
+       @* <div id="Share" class="modal">
+        
+            <div class="text-center modal-header">
+                <h2 class="modal-headerA">Share!</h2>
+            </div>
+        
+            <div class="modal-body">
+                <div id='fb-root'></div>
+            
+                <h5>
+                    <a href="#" id="shareButton">Share FastForward With Friends!</a>
+                </h5>
+            </div>
+        </div>*@
+        
+        @if (ViewBag.HasLocation)
+        {
+            <div id="College List" class="modal">
+                <div class="text-center modal-header">
+                    <h2 class="modal-headerA">Local Schools</h2>
+                </div>
+        
+                <div class="modal-body">
+                    <ul>
+                        <li><a href="@Model.LocalColleges[0].Website" target="_blank">@Model.LocalColleges[0].College</a></li>
+                        <li><a href="@Model.LocalColleges[1].Website" target="_blank">@Model.LocalColleges[1].College</a></li>
+                        <li><a href="@Model.LocalColleges[2].Website" target="_blank">@Model.LocalColleges[2].College</a></li>
+                    </ul>
+                </div>
+            </div>
+        }
+        
+        
+        <div id="Related Careers" class="modal">
+            <div class="text-center modal-header">
+                <h2 class="modal-headerA">Related Careers</h2>
+            </div>
+        
+            <div class="modal-body">
+                <ul>
+                    @foreach (var occupation in Model.RelatedOccupations)
+                    {
+                        <li>@occupation.Name</li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div id="Helpful Links" class="modal final-modal">
+            <div class="text-center modal-header">
+                <h2 class="modal-headerA">Helpful Links</h2>
+            </div>
+        
+            <div class="modal-body">
+                <ul> 
+                    <li> <a href="http://www.unigo.com/" target="_blank">Unigo.com</a> </li>
+                    <li> <a href="http://www.collegeboard.org/" target="_blank">Collegeboard</a> </li>
+                    <li> <a href="https://www.commonapp.org/" target="_blank">The Commonapp</a> </li>
+                    <li> <a href="http://www.fafsa.ed.gov/" target="_blank">Fafsa Application and information</a></li>
+                    <li> <a href="http://student.collegeboard.org/css-financial-aid-profile" target="_blank">Css profile</a> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <a href="~/Home/Result/" class="btn btn-danger btn-large final-btn margin-bottom-double"><i class="icon-backward icon-white margin-right-10"></i>Pick another career from your results</a>
+    </div>
+    
+    <div>
+        <a href="~/Home/Survey/" class="btn btn-info btn-large margin-bottom-double displayBlock align-center-block w200-max"><i class="icon-backward icon-white margin-right-10"></i>Retake the survey</a>
+    </div>
+    
+     <div>
+        <a href="~/Home/Learn/" class="btn btn-info btn-large margin-bottom-double displayBlock align-center-block w200-max">Learn<i class="icon-forward icon-white margin-left-10"></i></a>
+    </div>
+
+</section>
+
+
+
+<script src="~/Scripts/waypoints.min.js"></script>
+
+<script type="text/javascript">
+
+    var $current = $('#box_0');
+   
+    $(document).ready(function () {
+        var y = $(window).scrollTop();  //your current y position on the page
+
+        if ($current.attr("class").split(' ')[0] == ("modal")) {
+            
+            $current.toggleClass("modal-raise").popover('show');
+        }
+        else {
+            $current.toggleClass('face-raise', 200).promise().done(function () {
+                $current.closest('div').popover('show');
+            
+            });
+
+        }
+
+    });
+   
+
+    function activateBubble($elem) {
+        if ($current.attr("id") != $elem.attr("id")) {
+            if ($current.attr("class").split(' ')[0] == ("modal")) {
+                $current.toggleClass("modal-raise").popover('hide');
+            }
+            else {
+                $current.toggleClass("face-raise");
+                $current.closest('div').popover('hide');
+            }
+            $elem.closest('div').popover('show');
+            $elem.toggleClass('face-raise');
+            $current = $elem;
+        }
+    }
+
+    function activateModal($elem) {
+        if ($current.attr("id") != $elem.attr("id")) {
+            if ($current.attr("class").split(' ')[0] == ("modal")) {
+                $current.toggleClass("modal-raise").popover('hide');
+            } else {
+                $current.toggleClass("face-raise");
+                $current.closest('div').popover('hide');
+            }
+            $elem.toggleClass("modal-raise").popover('show');
+            $current = $elem;
+        }
+    }
+   
+    $('.modal').waypoint(function (direction) {
+        if (direction == 'down') {
+            activateModal($(this));
+        }
+    }, { offset: '50%' });
+    
+    $('.face').waypoint(function (direction) {
+        if (direction == 'down'){
+            activateBubble($(this));
+        }
+    }, { offset: '50%' });
+
+
+    $('.modal').waypoint(function (direction) {
+        if (direction == 'up') {
+            activateModal($(this));
+        }
+    }, { offset: '20%' });
+
+    $('.face').waypoint(function (direction) {
+        if (direction == 'up') {
+            activateBubble($(this));
+        }
+    }, { offset: '20%' });
+
+
+    $('.modal').click(function() {
+        activateModal($(this));
+    });
+    $('.face').click(function () {
+        activateBubble($(this));
+    });
+    
+</script>
